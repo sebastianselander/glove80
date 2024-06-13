@@ -1,3 +1,9 @@
+# How
+Edit the the `config/glove80.keymap` file according to your needs \
+Run `make` \
+Flash the firmware to the Glove
+
+
 # MoErgo Glove80 Custom Configuration for ZMK
 
 ![MoErgo Logo](moergo_logo.png)
