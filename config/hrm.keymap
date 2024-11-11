@@ -308,50 +308,50 @@ combos {
         compatible = "zmk,combos";
         global-quick-tap-ms = <75>;
         combo_ao {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <35 31>;
             bindings = <&ao>;
         };
         combo_ae {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <35 25>;
             bindings = <&ae>;
         };
         combo_oe {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <31 25>;
             bindings = <&oe>;
         };
 
         combo_lparen {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <37 38>;
             bindings = <&kp LS(N9)>;
         };
         combo_rparen {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <41 42>;
             bindings = <&kp LS(N0)>;
         };
 
         combo_lcurly {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <25 26>;
             bindings = <&kp LS(LBKT)>;
         };
         combo_rcurly {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <29 30>;
             bindings = <&kp LS(RBKT)>;
         };
 
         combo_lbracket {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <49 50>;
             bindings = <&kp LBKT>;
         };
         combo_rbracket {
-            timeout-ms = <60>;
+            timeout-ms = <50>;
             key-positions = <59 60>;
             bindings = <&kp RBKT>;
         };
@@ -457,6 +457,13 @@ behaviors {
 /* Automatically generated macro definitions */
 / {
     macros {
+
+    };
+};
+
+/* Automatically generated behavior definitions */
+/ {
+    behaviors {
     
     };
 };
@@ -464,7 +471,7 @@ behaviors {
 /* Automatically generated combos definitions */
 / {
     combos {
-            compatible = "zmk,combos";
+    compatible = "zmk,combos";
     };
 };
 
@@ -476,12 +483,12 @@ behaviors {
 
         layer_Base {
             bindings = <
-               &kp F1        &kp F2        &kp F3         &kp F4          &kp F5                                                                                                  &kp F6         &kp F7        &kp F8                &kp F9    &kp F10
-        &kp LG(SPACE)        &kp N1        &kp N2         &kp N3          &kp N4  &kp N5                                                                          &kp N6          &kp N7         &kp N8        &kp N9                &kp N0  &kp MINUS
-              &kp TAB         &kp Q         &kp W          &kp E           &kp R   &kp T                                                                           &kp Y           &kp U          &kp I         &kp O                 &kp P   &kp LBKT
-              &kp ESC  &lhrm LGUI A  &lhrm LALT S  &lhrm LCTRL D  &lhrm LSHIFT F   &kp G                                                                           &kp H  &rhrm RSHIFT J  &rhrm RCTRL K  &rhrm LALT L  &rhrm RGUI BACKSPACE    &kp DEL
-            &kp GRAVE         &kp Z         &kp X          &kp C           &kp V   &kp B   &mo 2   &none  &sk RALT  &sk RALT  &rpi LGUI DELETE  &rpi RGUI ESCAPE   &kp N           &kp M      &kp COMMA       &kp DOT               &kp RET      &none
- &magic LAYER_Magic 0      &kp LEFT     &kp RIGHT       &kp LBKT        &kp RBKT            &lsd   &mo 2     &mo 4     &mo 3           &kp TAB     &rpil 1 SPACE              &kp LS(N9)     &kp LS(N0)      &kp DOWN                &kp UP      &none
+               &kp F1        &kp F2        &kp F3         &kp F4          &kp F5                                                                                               &kp F6         &kp F7        &kp F8                &kp F9    &kp F10
+        &kp LG(SPACE)        &kp N1        &kp N2         &kp N3          &kp N4  &kp N5                                                                       &kp N6          &kp N7         &kp N8        &kp N9                &kp N0  &kp MINUS
+              &kp TAB         &kp Q         &kp W          &kp E           &kp R   &kp T                                                                        &kp Y           &kp U          &kp I         &kp O                 &kp P   &kp LBKT
+              &kp ESC  &lhrm LGUI A  &lhrm LALT S  &lhrm LCTRL D  &lhrm LSHIFT F   &kp G                                                                        &kp H  &rhrm RSHIFT J  &rhrm RCTRL K  &rhrm LALT L  &rhrm RGUI BACKSPACE    &kp DEL
+            &kp GRAVE         &kp Z         &kp X          &kp C           &kp V   &kp B   &mo 2   &none  &sk RALT  &sk RALT  &rpi LGUI DELETE        &kp RET   &kp N           &kp M      &kp COMMA       &kp DOT               &kp RET      &none
+ &magic LAYER_Magic 0      &kp LEFT     &kp RIGHT       &kp LBKT        &kp RBKT            &lsd   &mo 2     &none     &none       &rpil 3 TAB  &rpil 1 SPACE              &kp LS(N9)     &kp LS(N0)      &kp DOWN                &kp UP      &none
             >;
         };
 
@@ -489,10 +496,10 @@ behaviors {
             bindings = <
   &kp C_BRI_DN   &kp C_BRI_UP     &kp C_PREV     &kp C_NEXT      &kp C_PP                                                                                          &none      &none     &none     &none   &none
  &kp LS(EQUAL)     &kp LS(N1)     &kp LS(N9)     &kp LS(N0)      &kp SEMI     &kp COMMA                                                                 &none      &none      &none     &none     &none   &none
-     &kp GRAVE   &kp LS(LBKT)        &kp SQT    &kp LS(SQT)  &kp LS(RBKT)  &kp LS(FSLH)                                                                 &none  &kp LSHFT  &kp RCTRL  &kp LALT  &kp RGUI   &none
+     &kp GRAVE   &kp LS(LBKT)        &kp SQT    &kp LS(SQT)  &kp RS(RBKT)  &kp LS(FSLH)                                                                 &none  &kp LSHFT  &kp RCTRL  &kp LALT  &kp RGUI   &none
     &kp LS(N3)     &kp LS(N6)      &kp EQUAL  &kp LS(MINUS)    &kp LS(N4)    &kp LS(N8)                                                                 &none  &kp SPACE    &kp TAB     &none  &kp BSPC   &none
  &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(EQUAL)      &kp MINUS   &kp LS(DOT)      &kp FSLH      &kp BSLH     &kp DOT  &kp LS(N8)  &trans  &trans  &trans   &none      &none      &none     &none   &kp RET   &none
-    &kp LS(N2)     &kp LS(N7)   &kp LS(BSLH)       &kp LBKT      &kp RBKT                &kp LS(SEMI)  &kp LS(N5)    &kp SEMI  &trans  &trans  &trans              &none      &none     &none     &none   &none
+    &kp LS(N2)     &kp LS(N7)   &kp LS(BSLH)  &kp LS(GRAVE)     &kp GRAVE                &kp LS(SEMI)  &kp LS(N5)    &kp SEMI  &trans  &trans  &trans              &none      &none     &none     &none   &none
             >;
         };
 
@@ -542,4 +549,3 @@ behaviors {
 
     };
 };
-
