@@ -20,13 +20,18 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
 
+/* On demand includes */
+#include <dt-bindings/zmk/pointing.h>
+
 /* Automatically generated layer name #define */
 #define LAYER_Base 0
-#define LAYER_Symbol 1
-#define LAYER_Navigation 2
-#define LAYER_Number 3
-#define LAYER_NumberAlternative 4
-#define LAYER_Magic 5
+#define LAYER_Lower 1
+#define LAYER_Symbol 2
+#define LAYER_Navigation 3
+#define LAYER_Number 4
+#define LAYER_Typing 5
+#define LAYER_Magic 6
+#define LAYER_Mouse 7
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -304,95 +309,7 @@
            70 53     56 73  \
             71 54   55 72
 
-combos {
-        compatible = "zmk,combos";
-        global-quick-tap-ms = <75>;
-        combo_ao {
-            timeout-ms = <60>;
-            key-positions = <35 31>;
-            bindings = <&ao>;
-        };
-        combo_ae {
-            timeout-ms = <60>;
-            key-positions = <35 25>;
-            bindings = <&ae>;
-        };
-        combo_oe {
-            timeout-ms = <60>;
-            key-positions = <31 25>;
-            bindings = <&oe>;
-        };
-
-        combo_lparen {
-            timeout-ms = <60>;
-            key-positions = <37 38>;
-            bindings = <&kp LS(N9)>;
-        };
-        combo_rparen {
-            timeout-ms = <60>;
-            key-positions = <41 42>;
-            bindings = <&kp LS(N0)>;
-        };
-
-        combo_lcurly {
-            timeout-ms = <60>;
-            key-positions = <25 26>;
-            bindings = <&kp LS(LBKT)>;
-        };
-        combo_rcurly {
-            timeout-ms = <60>;
-            key-positions = <29 30>;
-            bindings = <&kp LS(RBKT)>;
-        };
-
-        combo_lbracket {
-            timeout-ms = <60>;
-            key-positions = <49 50>;
-            bindings = <&kp LBKT>;
-        };
-        combo_rbracket {
-            timeout-ms = <60>;
-            key-positions = <59 60>;
-            bindings = <&kp RBKT>;
-        };
-};
-
 behaviors {
-    ao: ao {
-        compatible = "zmk,behavior-macro";
-        label = "ao";
-        #binding-cells = <0>;
-        bindings
-            = <&macro_press &kp RALT>
-            , <&macro_tap &kp A>
-            , <&macro_release &kp RALT>
-            , <&macro_tap &kp A>;
-    }; 
-    ae: ae {
-        compatible = "zmk,behavior-macro";
-        label = "ae";
-        #binding-cells = <0>;
-        bindings
-            = <&macro_press &kp RALT>
-            , <&macro_tap &kp A>
-            , <&macro_release &kp RALT>
-            , <&macro_press &kp LSHIFT>
-            , <&macro_tap &kp SQT>
-            , <&macro_release &kp LSHIFT>;
-    };
-    oe: oe {
-        compatible = "zmk,behavior-macro";
-        label = "oe";
-        #binding-cells = <0>;
-        bindings
-            = <&macro_press &kp RALT>
-            , <&macro_tap &kp O>
-            , <&macro_release &kp RALT>
-            , <&macro_press &kp LSHIFT>
-            , <&macro_tap &kp SQT>
-            , <&macro_release &kp LSHIFT>;
-    };
-
     lt {
         flavor = "hold-preferred";
     };
@@ -400,7 +317,7 @@ behaviors {
         compatible = "zmk,behavior-sticky-key";
         #binding-cells = <1>;
         bindings = <&kp>;
-        release-after-ms = <2000>;
+        release-after-ms = <1000>;
         quick-release;
         ignore-modifiers;
     };
@@ -433,9 +350,9 @@ behaviors {
         flavor = "tap-preferred";
         hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
         hold-trigger-on-release; // wait for other home row mods
-        tapping-term-ms = <280>;
+        tapping-term-ms = <180>;
         quick-tap-ms = <175>;
-        require-prior-idle-ms = <50>;
+        require-prior-idle-ms = <40>;
         #binding-cells = <2>;
         bindings = <&kp>, <&kp>;
     };
@@ -444,11 +361,20 @@ behaviors {
         flavor = "balanced";
         hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
         hold-trigger-on-release; // wait for other home row mods
-        tapping-term-ms = <280>;
+        tapping-term-ms = <180>;
         quick-tap-ms = <175>;
         require-prior-idle-ms = <50>;
         #binding-cells = <2>;
         bindings = <&kp>, <&kp>;
+    };
+
+    layer_hold_stickytap: layer_hold_stickytap {
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        tapping-term-ms = <150>;
+        bindings = <&mo>, <&skq>;
+        flavor = "tap-preferred";
+        quick-tap-ms = <175>;
     };
 };
 
@@ -458,15 +384,167 @@ behaviors {
 / {
     macros {
     
+        // Create Å character in a macro using Alt-gr
+        ao_macro: ao_macro {
+            label = "&AO_MACRO";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press>
+                , <&kp RALT>
+                , <&macro_tap>
+                , <&kp A>
+                , <&macro_release>
+                , <&kp RALT>
+                , <&macro_tap>
+                , <&kp A>;
+        };
+    
+        // Create Ä character in a macro using Alt-gr
+        ae_macro: ae_macro {
+            label = "&AE_MACRO";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press>
+                , <&kp RALT>
+                , <&macro_tap>
+                , <&kp A>
+                , <&macro_release>
+                , <&kp RALT>
+                , <&macro_press>
+                , <&kp LSHFT>
+                , <&macro_tap>
+                , <&kp SQT>
+                , <&macro_release>
+                , <&kp LSHFT>;
+        };
+    
+        // Create Ö character in a macro using Alt-gr
+        oe_macro: oe_macro {
+            label = "&OE_MACRO";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press>
+                , <&kp RALT>
+                , <&macro_tap>
+                , <&kp O>
+                , <&macro_release>
+                , <&kp RALT>
+                , <&macro_press>
+                , <&kp LSHFT>
+                , <&macro_tap>
+                , <&kp SQT>
+                , <&macro_release>
+                , <&kp LSHFT>;
+        };
+    };
+};
+
+/* Automatically generated behavior definitions */
+/ {
+    behaviors {
+
+        // Home row mod hold-tap for left hand
+        LEFTHRM: LEFTHRM {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <40>;
+            hold-trigger-key-positions = <28 16 17 5 6 7 19 18 29 30 31 21 20 8 9 33 32 45 63 62 78 79 61 59 58 75 60 76 77 73 57 74 56 72 55 40 41 42 43 44>;
+            hold-trigger-on-release;
+        };
+
+        // Home row mod hold-tap for right hand
+        RIGHTHRM: RIGHTHRM {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <40>;
+            hold-trigger-key-positions = <54 53 52 69 70 71 68 67 66 65 64 46 47 34 22 23 11 10 0 1 2 3 4 14 13 12 24 25 48 49 50 39 51 27 26 15 35 36 37 38>;
+            hold-trigger-on-release;
+        };
+
+        // Hold layer tap 
+        layer_hold_tap: layer_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            bindings = <&mo>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <175>;
+        };
     };
 };
 
 /* Automatically generated combos definitions */
 / {
-    combos {
-            compatible = "zmk,combos";
+      combos {
+          compatible = "zmk,combos";
+                  combo_ao_combo {
+            timeout-ms = <50>;
+            key-positions = <35 31>;
+            bindings = <&ao_macro>;
+            layers = <0>;
+            require-prior-idle-ms = <50>;
+        };
+
+        combo_ae_combo {
+            timeout-ms = <50>;
+            key-positions = <35 25>;
+            bindings = <&ae_macro>;
+            layers = <0>;
+            require-prior-idle-ms = <50>;
+        };
+
+        combo_lbracket_combo {
+            timeout-ms = <45>;
+            key-positions = <49 50>;
+            bindings = <&kp LBKT>;
+            require-prior-idle-ms = <50>;
+        };
+
+        combo_lparen_combo {
+            timeout-ms = <45>;
+            key-positions = <37 38>;
+            bindings = <&kp LPAR>;
+            require-prior-idle-ms = <50>;
+        };
+
+        combo_oe_combo {
+            timeout-ms = <50>;
+            key-positions = <31 25>;
+            bindings = <&oe_macro>;
+            layers = <0>;
+            require-prior-idle-ms = <50>;
+        };
+
+        combo_rbracket_combo {
+            timeout-ms = <45>;
+            key-positions = <60 59>;
+            bindings = <&kp RBKT>;
+            require-prior-idle-ms = <50>;
+        };
+
+        combo_rparen_combo {
+            timeout-ms = <45>;
+            key-positions = <41 42>;
+            bindings = <&kp RPAR>;
+            require-prior-idle-ms = <50>;
+        };
+
+        combo_caps_lock {
+            timeout-ms = <100>;
+            key-positions = <71 72>;
+            bindings = <&caps_word>;
+            require-prior-idle-ms = <50>;
+        };
+      };
     };
-};
 
 /* Automatically generated keymap */
 / {
@@ -476,23 +554,34 @@ behaviors {
 
         layer_Base {
             bindings = <
-               &kp F1        &kp F2        &kp F3         &kp F4          &kp F5                                                                                                  &kp F6         &kp F7        &kp F8                &kp F9    &kp F10
-        &kp LG(SPACE)        &kp N1        &kp N2         &kp N3          &kp N4  &kp N5                                                                          &kp N6          &kp N7         &kp N8        &kp N9                &kp N0  &kp MINUS
-              &kp TAB         &kp Q         &kp W          &kp E           &kp R   &kp T                                                                           &kp Y           &kp U          &kp I         &kp O                 &kp P   &kp LBKT
-              &kp ESC  &lhrm LGUI A  &lhrm LALT S  &lhrm LCTRL D  &lhrm LSHIFT F   &kp G                                                                           &kp H  &rhrm RSHIFT J  &rhrm RCTRL K  &rhrm LALT L  &rhrm RGUI BACKSPACE    &kp DEL
-            &kp GRAVE         &kp Z         &kp X          &kp C           &kp V   &kp B   &mo 2   &none  &sk RALT  &sk RALT  &rpi LGUI DELETE  &rpi RGUI ESCAPE   &kp N           &kp M      &kp COMMA       &kp DOT               &kp RET      &none
- &magic LAYER_Magic 0      &kp LEFT     &kp RIGHT       &kp LBKT        &kp RBKT            &lsd   &mo 2     &mo 4     &mo 3           &kp TAB     &rpil 1 SPACE              &kp LS(N9)     &kp LS(N0)      &kp DOWN                &kp UP      &none
+            &kp F1           &kp F2           &kp F3            &kp F4            &kp F5                                                                                                                                                            &kp F6             &kp F7            &kp F8               &kp F9               &kp F10
+            &kp GRAVE           &kp N1           &kp N2            &kp N3            &kp N4  &kp N5                                                                                                                                 &kp N6             &kp N7             &kp N8            &kp N9               &kp N0             &kp MINUS
+            &kp GRAVE            &kp Q            &kp W             &kp E             &kp R   &kp T                                                                                                                                  &kp Y              &kp U              &kp I             &kp O                &kp P              &kp LBKT
+            &kp ESC  &lhrm LGUI A  &lhrm LALT S  &lhrm LCTRL D  &lhrm LSHFT F   &kp G                                                                                                                                  &kp H  &rhrm RSHFT J  &rhrm RCTRL K  &rhrm LALT L  &rhrm RGUI SEMI               &kp DEL
+            &sk LSHFT            &kp Z            &kp X             &kp C             &kp V   &kp B   &layer_hold_tap 7 ESC                  &sk LS(LCTRL)      &lower      &lower          &sk LS(LCTRL)                  &kp RET   &kp N              &kp M          &kp COMMA           &kp DOT             &kp FSLH             &sk RSHFT
+ &magic LAYER_Magic 0       &kp LS(N7)         &kp LBKT        &kp LS(N9)     &skq LSHIFT          &layer_hold_tap 3 BSPC  &layer_hold_stickytap 4 LSHFT  &caps_word  &caps_word  &layer_hold_tap 5 TAB  &layer_hold_tap 2 SPACE                      &skq RSHIFT         &kp LS(N0)          &kp RBKT                &none  &magic LAYER_Magic 0
+            >;
+        };
+
+        layer_Lower {
+            bindings = <
+  &none   &none   &none   &none   &none                                                                   &none   &none   &none   &none   &none
+  &none   &none   &none   &none   &none   &none                                                   &none   &none   &none   &none   &none   &none
+  &none   &none   &none   &none   &none   &none                                                   &none   &none   &none   &none   &none   &none
+  &none   &none   &none   &none   &none   &none                                                   &none   &none   &none   &none   &none   &none
+  &none   &none   &none   &none   &none   &none   &to 7   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
+  &none   &none   &none   &none   &none           &to 3   &to 4   &to 0   &to 0   &to 5   &to 2           &none   &none   &none   &none   &none
             >;
         };
 
         layer_Symbol {
             bindings = <
-  &kp C_BRI_DN   &kp C_BRI_UP     &kp C_PREV     &kp C_NEXT      &kp C_PP                                                                                          &none      &none     &none     &none   &none
- &kp LS(EQUAL)     &kp LS(N1)     &kp LS(N9)     &kp LS(N0)      &kp SEMI     &kp COMMA                                                                 &none      &none      &none     &none     &none   &none
-     &kp GRAVE   &kp LS(LBKT)        &kp SQT    &kp LS(SQT)  &kp LS(RBKT)  &kp LS(FSLH)                                                                 &none  &kp LSHFT  &kp RCTRL  &kp LALT  &kp RGUI   &none
-    &kp LS(N3)     &kp LS(N6)      &kp EQUAL  &kp LS(MINUS)    &kp LS(N4)    &kp LS(N8)                                                                 &none  &kp SPACE    &kp TAB     &none  &kp BSPC   &none
- &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(EQUAL)      &kp MINUS   &kp LS(DOT)      &kp FSLH      &kp BSLH     &kp DOT  &kp LS(N8)  &trans  &trans  &trans   &none      &none      &none     &none   &kp RET   &none
-    &kp LS(N2)     &kp LS(N7)   &kp LS(BSLH)       &kp LBKT      &kp RBKT                &kp LS(SEMI)  &kp LS(N5)    &kp SEMI  &trans  &trans  &trans              &none      &none     &none     &none   &none
+         &none          &none         &none          &none          &none                                                                                            &none        &none       &none     &none   &none
+         &kp GRAVE      &kp LBKT    &kp LS(N9)     &kp LS(N0)       &kp RBKT     &kp COMMA                                                                   &none      &none        &none       &none     &none   &none
+    &kp LS(N1)   &kp LS(LBKT)       &kp SQT    &kp LS(SQT)   &kp RS(RBKT)  &kp LS(FSLH)                                                                &kp SEMI  &kp LSHFT    &kp RCTRL    &kp LALT  &kp RGUI   &none
+    &kp LS(N3)     &kp LS(N6)     &kp EQUAL  &kp LS(MINUS)     &kp LS(N4)    &kp LS(N8)                                                                 &kp DOT   &kp BSPC      &kp TAB   &kp SPACE   &kp RET   &none
+ &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(BSLH)      &kp MINUS    &kp LS(DOT)      &kp FSLH      &kp BSLH     &kp DOT  &kp LS(N8)   &none   &none   &none  &kp FSLH    &kp DEL  &kp LS(TAB)       &none     &none   &none
+    &kp LS(N2)     &kp LS(N7)      &kp LBKT       &kp RBKT  &kp LS(EQUAL)                &kp LS(SEMI)  &kp LS(N5)    &kp SEMI   &to 0   &none   &none                &none   &kp LS(N9)  &kp LS(N0)     &none   &none
             >;
         };
 
@@ -501,31 +590,31 @@ behaviors {
  &trans     &trans     &trans      &trans       &trans                                                                              &trans      &trans     &trans      &trans  &trans
  &trans     &trans     &trans      &trans       &trans     &trans                                                      &trans       &trans      &trans     &trans      &trans  &trans
  &trans     &trans     &trans      &trans       &trans     &trans                                                  &kp K_REDO  &kp K_PASTE  &kp K_COPY  &kp K_CUT  &kp K_UNDO  &trans
- &trans  &skq LGUI  &skq LALT  &skq LCTRL  &skq LSHIFT  &kp PSCRN                                                    &kp LEFT     &kp DOWN      &kp UP  &kp RIGHT    &kp BSPC  &trans
- &trans     &trans     &trans      &trans       &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans    &kp HOME    &kp PG_DN   &kp PG_UP    &kp END     &kp RET  &trans
- &trans     &trans     &trans      &trans       &trans             &trans  &trans  &trans  &trans  &trans  &trans                   &trans      &trans     &trans      &trans  &trans
+ &trans  &skq LGUI  &skq LALT  &skq LCTRL  &skq LSHIFT  &kp PSCRN                                                    &kp LEFT     &kp DOWN      &kp UP  &kp RIGHT       &none  &trans
+ &trans     &trans     &trans      &trans       &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans    &kp HOME    &kp PG_DN   &kp PG_UP    &kp END       &none  &trans
+ &trans     &trans     &trans      &trans       &trans             &trans  &trans   &to 0   &none  &trans  &trans                   &trans      &trans     &trans      &trans  &trans
             >;
         };
 
         layer_Number {
             bindings = <
-  &none   &none   &none   &none   &none                                                                        &none       &none      &none                 &none   &none
-  &none   &none   &none   &none   &none   &none                                                   &none        &none       &none      &none                 &none   &none
-  &none   &none  &kp N7  &kp N8  &kp N9   &none                                                   &none        &none       &none      &none                 &none   &none
-  &none   &none  &kp N4  &kp N5  &kp N6   &none                                                   &none  &skq LSHIFT  &skq LCTRL  &skq LALT  &rhrm RGUI BACKSPACE   &none
-  &none   &none  &kp N1  &kp N2  &kp N3   &none   &none   &none   &none   &none   &none   &none   &none        &none       &none      &none               &kp RET   &none
-  &none   &none   &none   &none   &none          &kp N0   &none   &none   &none   &none   &none                &none       &none      &none                 &none   &none
+  &none     &none     &none      &none          &none                                                                                                       &none       &none       &none       &none         &none
+  &none     &none     &none      &none          &none   &none                                                                           &kp LS(GRAVE)  &kp LS(N6)  &kp LS(N3)  &kp LS(N4)  &kp LS(N1)  &kp LS(BSLH)
+  &none     &none     &none      &none          &none   &kp A                                                                              &kp LS(N5)      &kp N7      &kp N8      &kp N9   &kp COLON         &kp K
+  &none  &kp LGUI  &kp LALT  &kp LCTRL      &kp LSHFT   &kp B                                                                           &kp LS(EQUAL)      &kp N4      &kp N5      &kp N6   &kp MINUS         &kp J
+  &none     &none     &none  &kp MINUS  &kp LS(MINUS)   &kp C         &kp D       &kp E   &kp F  &kp LS(COMMA)  &kp LS(DOT)  &kp EQUAL     &kp LS(N8)      &kp N1      &kp N2      &kp N3    &kp FSLH     &kp LS(G)
+  &none     &none     &none      &none          &none          &kp LS(SEMI)  &kp LS(N5)   &to 0      &kp COMMA      &kp DOT     &kp N0                 &kp LS(N9)    &kp LBKT    &kp RBKT  &kp LS(N0)    &kp LS(N2)
             >;
         };
 
-        layer_NumberAlternative {
+        layer_Typing {
             bindings = <
-  &kp C_BRI_DN   &kp C_BRI_UP     &kp C_PREV     &kp C_NEXT      &kp C_PP                                                                                       &none   &none   &none     &none   &none
- &kp LS(EQUAL)     &kp LS(N1)     &kp LS(N9)     &kp LS(N0)      &kp SEMI     &kp COMMA                                                                 &none   &none   &none   &none     &none   &none
-     &kp GRAVE   &kp LS(LBKT)        &kp SQT    &kp LS(SQT)  &kp LS(RBKT)  &kp LS(FSLH)                                                                 &none  &kp N7  &kp N8  &kp N9     &none   &none
-    &kp LS(N3)     &kp LS(N6)      &kp EQUAL  &kp LS(MINUS)    &kp LS(N4)    &kp LS(N8)                                                                 &none  &kp N4  &kp N5  &kp N6  &kp BSPC   &none
- &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(EQUAL)      &kp MINUS   &kp LS(DOT)      &kp FSLH      &kp BSLH     &kp DOT  &kp LS(N8)  &trans  &trans  &trans   &none  &kp N1  &kp N2  &kp N3   &kp RET   &none
-    &kp LS(N2)     &kp LS(N7)   &kp LS(BSLH)       &kp LBKT      &kp RBKT                &kp LS(SEMI)  &kp LS(N5)    &kp SEMI  &trans  &trans  &kp N0           &none   &none   &none     &none   &none
+               &kp F1      &kp F2    &kp F3    &kp F4         &kp F5                                                                                   &kp F6      &kp F7    &kp F8    &kp F9               &kp F10
+        &kp LG(SPACE)      &kp N1    &kp N2    &kp N3         &kp N4  &kp N5                                                               &kp N6      &kp N7      &kp N8    &kp N9    &kp N0             &kp MINUS
+            &kp GRAVE       &kp Q     &kp W     &kp E          &kp R   &kp T                                                                &kp Y       &kp U       &kp I     &kp O     &kp P              &kp LBKT
+              &kp ESC       &kp A     &kp S     &kp D          &kp F   &kp G                                                                &kp H       &kp J       &kp K     &kp L  &kp SEMI               &kp DEL
+           &caps_word       &kp Z     &kp X     &kp C          &kp V   &kp B   &kp ESC   &kp UP  &kp DOWN  &kp LEFT  &kp RIGHT    &kp RET   &kp N       &kp M   &kp COMMA   &kp DOT  &kp FSLH            &caps_word
+ &magic LAYER_Magic 0  &kp LS(N7)  &kp LBKT  &kp RBKT  &kp LS(EQUAL)          &kp BSPC  &kp DEL     &to 0     &to 0    &kp TAB  &kp SPACE          &kp LS(N9)  &kp LS(N0)  &kp DOWN    &kp UP  &magic LAYER_Magic 0
             >;
         };
 
@@ -540,6 +629,16 @@ behaviors {
             >;
         };
 
+        layer_Mouse {
+            bindings = <
+  &none   &none   &none   &none   &none                                                                                       &none         &none            &none   &none   &none
+  &none   &none   &none   &none   &none   &none                                                               &none           &none         &none            &none   &none   &none
+  &none   &none   &none   &none   &none   &none                                                      &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT   &none   &none
+  &none   &none   &none   &none   &none   &none                                                      &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT   &none   &none
+  &none   &none   &none   &none   &none   &none   &none   &none   &none   &none     &none  &mkp MB3           &none           &none         &none            &none   &none   &none
+  &none   &none   &none   &none   &none           &none   &none   &to 0   &none  &mkp MB2  &mkp MB1                           &none         &none            &none   &none   &none
+            >;
+        };
+
     };
 };
-
