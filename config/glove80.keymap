@@ -358,7 +358,7 @@ behaviors {
     };
     rhrm: homerow_mod_right {
         compatible = "zmk,behavior-hold-tap";
-        flavor = "balanced";
+        flavor = "tap-preferred";
         hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
         hold-trigger-on-release; // wait for other home row mods
         tapping-term-ms = <180>;
