@@ -349,7 +349,7 @@ behaviors {
         compatible = "zmk,behavior-hold-tap";
         flavor = "tap-preferred";
         hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
-        //hold-trigger-on-release; // wait for other home row mods
+        hold-trigger-on-release; // wait for other home row mods
         tapping-term-ms = <180>;
         quick-tap-ms = <175>;
         require-prior-idle-ms = <40>;
@@ -360,7 +360,7 @@ behaviors {
         compatible = "zmk,behavior-hold-tap";
         flavor = "balanced";
         hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
-        //hold-trigger-on-release; // wait for other home row mods
+        hold-trigger-on-release; // wait for other home row mods
         tapping-term-ms = <180>;
         quick-tap-ms = <175>;
         require-prior-idle-ms = <50>;
@@ -460,7 +460,7 @@ behaviors {
         RIGHTHRM: RIGHTHRM {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <180>;
+            tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
             flavor = "tap-preferred";
             quick-tap-ms = <175>;
