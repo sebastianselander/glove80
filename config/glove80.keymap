@@ -345,6 +345,95 @@ behaviors {
         require-prior-idle-ms = <100>;
         bindings = <&mo>, <&kp>;
     };
+    hrm_left_pinky: hrm_left_pinky {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <240>;
+        quick-tap-ms = <200>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
+    hrm_left_ring: hrm_left_ring {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <220>;
+        quick-tap-ms = <150>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
+    hrm_left_middle: hrm_left_middle {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <200>;
+        quick-tap-ms = <150>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
+    hrm_left_index: hrm_left_index {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <180>;
+        quick-tap-ms = <150>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
+
+    hrm_right_pinky: hrm_right_pinky {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <240>;
+        quick-tap-ms = <200>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
+    hrm_right_ring: hrm_right_ring {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <220>;
+        quick-tap-ms = <150>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
+    hrm_right_middle: hrm_right_middle {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <200>;
+        quick-tap-ms = <150>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
+    hrm_right_index: hrm_right_index {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = "tap-preferred";
+        hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
+        hold-trigger-on-release; // wait for other home row mods
+        tapping-term-ms = <180>;
+        quick-tap-ms = <150>;
+        require-prior-idle-ms = <100>;
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
     lhrm: homerow_mod_left {
         compatible = "zmk,behavior-hold-tap";
         flavor = "tap-preferred";
@@ -553,12 +642,12 @@ behaviors {
 
         layer_Base {
             bindings = <
-                &kp F1               &kp F2       &kp F3       &kp F4        &kp F5                                                                                                                                                        &kp F6        &kp F7        &kp F8       &kp F9          &kp F10
-                &kp GRAVE            &kp N1       &kp N2       &kp N3        &kp N4        &kp N5                                                                                                                                   &kp N6 &kp N7        &kp N8        &kp N9       &kp N0          &kp MINUS
-                &kp GRAVE            &kp Q        &kp W        &kp E         &kp R         &kp T                                                                                                                                    &kp Y  &kp U         &kp I         &kp O        &kp P           &kp LBKT
-                &kp ESC              &lhrm LGUI A &lhrm LALT S &lhrm LCTRL D &lhrm LSHFT F &kp G                                                                                                                                    &kp H  &rhrm RSHFT J &rhrm RCTRL K &rhrm LALT L &rhrm RGUI SEMI &kp DEL
-                &skq LSHFT           &kp Z        &kp X        &kp C         &kp V         &kp B   &layer_hold_tap 7 ESC   &sk LS(LCTRL)                  &lower         &lower      &sk LS(LCTRL)          &kp RET                 &kp N  &kp M         &kp COMMA     &kp DOT      &kp FSLH        &sk RSHFT
-                &magic LAYER_Magic 0 &kp LS(N7)   &kp LBKT     &kp LS(N9)    &skq LSHIFT           &layer_hold_tap 3 BSPC  &layer_hold_stickytap 4 LSHFT  &caps_word     &caps_word  &layer_hold_tap 5 TAB  &layer_hold_tap 2 SPACE        &skq RSHIFT   &kp LS(N0)    &kp RBKT     &none           &magic LAYER_Magic 0
+                &kp F1               &kp F2                 &kp F3                &kp F4                   &kp F5                                                                                                                                                                  &kp F6                   &kp F7                    &kp F8                 &kp F9                     &kp F10
+                &kp GRAVE            &kp N1                 &kp N2                &kp N3                   &kp N4                  &kp N5                                                                                                                                   &kp N6 &kp N7                   &kp N8                    &kp N9                 &kp N0                     &kp MINUS
+                &kp GRAVE            &kp Q                  &kp W                 &kp E                    &kp R                   &kp T                                                                                                                                    &kp Y  &kp U                    &kp I                     &kp O                  &kp P                      &kp LBKT
+                &kp ESC              &hrm_left_pinky LGUI A &hrm_left_ring LALT S &hrm_left_middle LCTRL D &hrm_left_index LSHFT F &kp G                                                                                                                                    &kp H  &hrm_right_index RSHFT J &hrm_right_middle RCTRL K &hrm_right_ring LALT L &hrm_right_pinky RGUI SEMI &kp DEL
+                &skq LSHFT           &kp Z                  &kp X                 &kp C                    &kp V                   &kp B   &layer_hold_tap 7 ESC   &sk LS(LCTRL)                  &lower         &lower      &sk LS(LCTRL)          &kp RET                 &kp N  &kp M                    &kp COMMA                 &kp DOT                &kp FSLH                   &sk RSHFT
+                &magic LAYER_Magic 0 &kp LS(N7)             &kp LBKT              &kp LS(N9)               &skq LSHIFT                     &layer_hold_tap 3 BSPC  &layer_hold_stickytap 4 LSHFT  &caps_word     &caps_word  &layer_hold_tap 5 TAB  &layer_hold_tap 2 SPACE        &skq RSHIFT              &kp LS(N0)                &kp RBKT               &none                      &magic LAYER_Magic 0
             >;
         };
 
