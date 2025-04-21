@@ -332,7 +332,7 @@ behaviors {
         #binding-cells = <2>;
         flavor = "tap-preferred";
         tapping-term-ms = <200>;
-        quick-tap-ms = <200>;
+        quick-tap-ms = <250>;
         require-prior-idle-ms = <100>;
         bindings = <&kp>, <&kp>;
     };
@@ -341,7 +341,7 @@ behaviors {
         #binding-cells = <2>;
         flavor = "tap-preferred";
         tapping-term-ms = <200>;
-        quick-tap-ms = <200>;
+        quick-tap-ms = <250>;
         require-prior-idle-ms = <100>;
         bindings = <&mo>, <&kp>;
     };
@@ -351,7 +351,7 @@ behaviors {
         hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
         hold-trigger-on-release; // wait for other home row mods
         tapping-term-ms = <240>;
-        quick-tap-ms = <200>;
+        quick-tap-ms = <250>;
         require-prior-idle-ms = <100>;
         #binding-cells = <2>;
         bindings = <&kp>, <&kp>;
@@ -396,7 +396,7 @@ behaviors {
         hold-trigger-key-positions = <LEFT_HAND_KEYS THUMB_KEYS>;
         hold-trigger-on-release; // wait for other home row mods
         tapping-term-ms = <240>;
-        quick-tap-ms = <200>;
+        quick-tap-ms = <250>;
         require-prior-idle-ms = <100>;
         #binding-cells = <2>;
         bindings = <&kp>, <&kp>;
@@ -638,7 +638,6 @@ behaviors {
 / {
     keymap {
         compatible = "zmk,keymap";
-
 
         layer_Base {
             bindings = <
